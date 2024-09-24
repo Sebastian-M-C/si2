@@ -20,18 +20,18 @@ public class Cliente {
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
-    private Date createAt;
+    private String status;
     @Column(nullable = false)
-    private String estados;
+    private Date createAt;
 
 
-    public Cliente(Long id, String nombre, String apellido, String email, Date createAt, String estados) {
+    public Cliente(Long id, String nombre, String apellido, String email, String status, Date createAt) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
+        this.status = status;
         this.createAt = createAt;
-        this.estados = estados;
     }
 
     public Cliente() {
@@ -69,19 +69,19 @@ public class Cliente {
         this.email = email;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Date getCreateAt() {
         return createAt;
     }
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
-    }
-
-    public String getEstados() {
-        return estados;
-    }
-
-    public void setEstados(String estados) {
-        this.estados = estados;
     }
 }
