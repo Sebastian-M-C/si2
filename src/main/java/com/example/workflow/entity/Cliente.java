@@ -19,7 +19,7 @@ public class Cliente {
     private String apellido;
     @Column(nullable = false, unique = true)
     private String email;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String status;
     @Column(nullable = false)
     private Date createAt;

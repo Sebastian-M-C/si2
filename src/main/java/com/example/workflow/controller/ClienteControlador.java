@@ -23,8 +23,8 @@ public class ClienteControlador {
 
     @GetMapping({"","/"})
     public String getClientes(Model model){
-        var cliente = clienteRepositorio.findAll(Sort.by(Sort.Direction.DESC,"id"));
-        model.addAttribute("cliente", cliente);
+        var clientes = clienteRepositorio.findAll(Sort.by(Sort.Direction.DESC,"id"));
+        model.addAttribute("cliente", clientes);
         return "clientes/index";
     }
 
