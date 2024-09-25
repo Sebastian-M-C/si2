@@ -92,6 +92,7 @@ public class ClienteControlador {
             return "redirect:/clientes";
         }
 
+        //aqui se usa para el boton guardar th:action="@{/ruta}"
         model.addAttribute("cliente", cliente);
 
         if(result.hasErrors()){
