@@ -16,7 +16,7 @@ import java.util.Set;
 
 public class Tramite implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nombre;
     private String descripcion;
