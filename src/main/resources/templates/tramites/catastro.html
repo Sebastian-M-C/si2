@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Lista de Trámites</title>
+    <title>Lista de Trámites de Catastro</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -67,7 +67,7 @@
                             Editar</a>
 
                         <!-- Eliminar -->
-                        <a class="btn btn-danger btn-sm" th:href="@{/tramites/eliminar/{id}(id=${tramite.id})}"
+                        <a class="btn btn-danger btn-sm" th:href="@{/tramites/catastro/eliminar/{id}(id=${tramite.id})}"
                            onclick="return confirm('¿Estás seguro de eliminar este trámite?')">
                             Eliminar
                         </a>

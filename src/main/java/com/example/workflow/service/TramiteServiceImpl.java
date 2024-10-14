@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class TramiteServiceImpl implements TramiteService{
@@ -33,6 +34,11 @@ public class TramiteServiceImpl implements TramiteService{
     @Override
     public void deleteTramite(Long id) {
         tramiteRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Tramite> findTramiteByID(Long id) {
+        return tramiteRepository.findById(id);
     }
 
 }

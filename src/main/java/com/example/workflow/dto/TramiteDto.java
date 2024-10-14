@@ -8,12 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TramiteDto {
 
-
     @NotEmpty(message = "El nombre es necesario")
     public String nombre;
     @NotEmpty(message = "La descripcion es necesario")
     public String descripcion;
-
-
-
+    private Long categoria_id;
 }

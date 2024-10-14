@@ -97,6 +97,15 @@
                             <a class="btn btn-outline-primary" th:href="@{/tramites/juridica}">Cancelar</a>
                         </div>
                     </div>
+                    <div class="row mb-3" hidden>
+                        <label class="col-sm-4 col-form-label">Id de la categoría</label>
+                        <div class="col-sm-8">
+                            <input type="hidden" class="form-control" th:field="*{categoria_id}" value="4" />
+                            <p th:if="${#fields.hasErrors('categoria_id')}"
+                               th:errorclass="text-danger"
+                               th:errors="*{categoria_id}"></p>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
