@@ -2,15 +2,25 @@ package com.example.workflow.controller;
 
 import com.example.workflow.dto.ClienteDto;
 import com.example.workflow.entity.Cliente;
-import com.example.workflow.repository.ClienteRepositorio;
+import com.example.workflow.entity.Usuario;
+import com.example.workflow.repository.ClienteRepository;
+import com.example.workflow.service.BitacoraServicio;
+import com.example.workflow.service.UsuarioService;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.filter.RequestContextFilter;
 
 import java.util.Date;
 
@@ -19,28 +29,55 @@ import java.util.Date;
 public class ClienteControlador {
 
     @Autowired
-    private ClienteRepositorio clienteRepositorio;
+    private ClienteRepository clienteRepository;
+    @Autowired
+    private BitacoraServicio bitacoraServicio;
+    @Autowired
+    private UsuarioService usuarioService;
+
+
+    private static final Logger logger= LoggerFactory.getLogger(ClienteControlador.class);
+    @Autowired
+    private RequestContextFilter requestContextFilter;
 
     @GetMapping({"","/"})
-    public String getClientes(Model model){
-        var clientes = clienteRepositorio.findAll(Sort.by(Sort.Direction.DESC,"id"));
+    public String getClientes(Model model, HttpServletRequest request){
+        var clientes = clienteRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
         model.addAttribute("cliente", clientes);
+
+        //registar en bitacora que el cliente visualizo la lista de clientes
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String nombreUsuario=authentication.getName();
+        Usuario usuario = usuarioService.encontrarPorNombreUsuario(nombreUsuario);
+        String ip=request.getRemoteAddr();
+        String dispositivo=request.getHeader("User-Agent");
+        bitacoraServicio.regirtrarAccion(usuario,"Visualizo la lista de Cliente", dispositivo,ip);
+
         return "clientes/index";
     }
 
     @GetMapping("/crear") // para que me dirija a ese lugar
-    public String createCliente(Model model){
+    public String createCliente(Model model, HttpServletRequest request){
         ClienteDto clienteDto = new ClienteDto();
         model.addAttribute("clienteDto", clienteDto);
+
+        //registar en bitacora que el adm accedio a la pagina de creacion de un new cliente
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String nombreUsuario=authentication.getName();
+        Usuario usuario = usuarioService.encontrarPorNombreUsuario(nombreUsuario);
+        String ip=request.getRemoteAddr();
+        String dispositivo=request.getHeader("User-Agent");
+        bitacoraServicio.regirtrarAccion(usuario,"Accedio a la pagina de crea un new Cliente", dispositivo,ip);
+
         return "clientes/crear";
     }
 
     @PostMapping("/crear")
     public String createCliente(
                     @Valid @ModelAttribute ClienteDto clienteDto,
-                    BindingResult result
+                    BindingResult result, HttpServletRequest request
     ){
-        if(clienteRepositorio.findByEmail(clienteDto.getEmail())!= null){
+        if(clienteRepository.findByEmail(clienteDto.getEmail())!= null){
             result.addError(
                     new FieldError("clienteDto","email", clienteDto.getEmail(),
                     false, null, null, "Email ya usado")
@@ -56,14 +93,22 @@ public class ClienteControlador {
         cliente.setStatus(clienteDto.getStatus());
         cliente.setCreateAt(new Date());
 
-        clienteRepositorio.save(cliente);
+        clienteRepository.save(cliente);
+
+        //registar en bitacora que el adm creo un new cliente
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String nombreUsuario=authentication.getName();
+        Usuario usuario = usuarioService.encontrarPorNombreUsuario(nombreUsuario);
+        String ip=request.getRemoteAddr();
+        String dispositivo=request.getHeader("User-Agent");
+        bitacoraServicio.regirtrarAccion(usuario,"Creo un new Cliente", dispositivo,ip);
 
         return "redirect:/clientes";
     }
 
     @GetMapping("/editar/{id}")
-    public String editarCliente(Model model, @PathVariable Long id){
-        Cliente cliente = clienteRepositorio.findById(id).orElse(null);
+    public String editarCliente(Model model, @PathVariable Long id, HttpServletRequest request){
+        Cliente cliente = clienteRepository.findById(id).orElse(null);
         if(cliente == null){
             return "redirect:/clientes";
         }
@@ -77,6 +122,15 @@ public class ClienteControlador {
         model.addAttribute("cliente", cliente);
         model.addAttribute("clienteDto", clienteDto);
 
+        //registar en bitacora que el cliente accedio a la pagina de edicion
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String nombreUsuario=authentication.getName();
+        Usuario usuario = usuarioService.encontrarPorNombreUsuario(nombreUsuario);
+        String ip=request.getRemoteAddr();
+        String dispositivo=request.getHeader("User-Agent");
+        bitacoraServicio.regirtrarAccion(usuario,"Accedio a la pagina de edicion del cliente con ID: "+id, dispositivo,ip);
+
+
         return "clientes/editar";
     }
 
@@ -85,9 +139,9 @@ public class ClienteControlador {
             Model model,
             @PathVariable Long id,
             @Valid @ModelAttribute ClienteDto clienteDto,
-            BindingResult result
+            BindingResult result, HttpServletRequest request
     ){
-        Cliente cliente = clienteRepositorio.findById(id).orElse(null);
+        Cliente cliente = clienteRepository.findById(id).orElse(null);
         if(cliente == null){
             return "redirect:/clientes";
         }
@@ -105,7 +159,7 @@ public class ClienteControlador {
         cliente.setStatus(clienteDto.getStatus());
 
         try{
-            clienteRepositorio.save(cliente);
+            clienteRepository.save(cliente);
         }catch (Exception ex){
             result.addError(
                 new FieldError("clienteDto", "email", clienteDto.getEmail(),
@@ -114,15 +168,33 @@ public class ClienteControlador {
             return "clientes/editar";
         }
 
+        //registar en bitacora que el adm edito un clientes
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String nombreUsuario=authentication.getName();
+        Usuario usuario = usuarioService.encontrarPorNombreUsuario(nombreUsuario);
+        String ip=request.getRemoteAddr();
+        String dispositivo=request.getHeader("User-Agent");
+        bitacoraServicio.regirtrarAccion(usuario,"Edito el Clientecon ID: "+id, dispositivo,ip);
+
+
         return "redirect:/clientes";
     }
 
     @GetMapping("/eliminar")
-    public String eliminarCliente(@RequestParam Long id){
-        Cliente cliente = clienteRepositorio.findById(id).orElse(null);
+    public String eliminarCliente(@RequestParam Long id, HttpServletRequest request){
+        Cliente cliente = clienteRepository.findById(id).orElse(null);
 
         if(cliente != null){
-            clienteRepositorio.delete(cliente);
+            clienteRepository.delete(cliente);
+
+            //registar en bitacora que el adm elimino a un cliente
+            Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+            String nombreUsuario=authentication.getName();
+            Usuario usuario = usuarioService.encontrarPorNombreUsuario(nombreUsuario);
+            String ip=request.getRemoteAddr();
+            String dispositivo=request.getHeader("User-Agent");
+            bitacoraServicio.regirtrarAccion(usuario,nombreUsuario, dispositivo,ip);
+
         }
 
         return "redirect:/clientes";

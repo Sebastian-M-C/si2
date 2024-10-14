@@ -5,11 +5,13 @@ import com.example.workflow.entity.Usuario;
 import com.example.workflow.repository.RoleRepository;
 import com.example.workflow.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +31,11 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Transactional(readOnly = true)
     public List<Usuario> findAll() {
         return (List<Usuario>) repository.findAll();
+    }
+
+    @Override
+    public Usuario encontrarPorNombreUsuario(String nombreUsuario) {
+        return null;
     }
 
     @Override
@@ -55,4 +62,18 @@ public class UsuarioServiceImpl implements UsuarioService{
         return repository.existsByUsername(usuario);
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getPassword() {
+        return "";
+    }
+
+    @Override
+    public String getUsername() {
+        return "";
+    }
 }
