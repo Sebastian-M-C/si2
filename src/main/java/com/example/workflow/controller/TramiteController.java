@@ -23,7 +23,7 @@ public class TramiteController {
     public TramiteRepository tramiteRepository;
 
     @GetMapping("/tramites/catastro")
-    public String getListOfDocs(Model model) {
+    public String getListOfDocsCatastro(Model model) {
         var tramites = tramiteRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
         model.addAttribute("tramites", tramites);
         return "/tramites/catastro";
@@ -31,14 +31,14 @@ public class TramiteController {
 
 
     @GetMapping("tramites/crear")
-    public String createDoc(Model model){
+    public String createDocCatastro(Model model){
         TramiteDto tramiteDto = new TramiteDto();
         model.addAttribute("tramiteDto", tramiteDto);
         return "tramites/crear";
     }
 
     @PostMapping("tramites/crear")
-    public String createDoc(
+    public String createDocCatastro(
             @Valid @ModelAttribute TramiteDto tramiteDto,
             BindingResult result,
             Model model
@@ -57,4 +57,108 @@ public class TramiteController {
         return "redirect:/tramites/catastro";
     }
 
+    @GetMapping("/tramites/juridica")
+    public String getListOfDocsJuridica(Model model) {
+        var tramites = tramiteRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+        model.addAttribute("tramites", tramites);
+        return "/tramites/juridica";
+    }
+
+
+    @GetMapping("tramites/juridicaCrear")
+    public String createDocJuridica(Model model){
+        TramiteDto tramiteDto = new TramiteDto();
+        model.addAttribute("tramiteDto", tramiteDto);
+        return "tramites/juridicaCrear";
+    }
+
+    @PostMapping("tramites/juridicaCrear")
+    public String createDocJuridica(
+            @Valid @ModelAttribute TramiteDto tramiteDto,
+            BindingResult result,
+            Model model
+    ) {
+        if (result.hasErrors()) {
+            model.addAttribute("tramiteDto", tramiteDto);  // volver a enviar el DTO con errores
+            return "/tramites/juridicaCrear";  // volver a la vista del formulario
+        }
+
+        Tramite tramite = new Tramite();
+        tramite.setNombre(tramiteDto.getNombre());
+        tramite.setDescripcion(tramiteDto.getDescripcion());
+
+        tramiteRepository.save(tramite);
+
+        return "redirect:/tramites/juridica";
+    }
+
+    @GetMapping("/tramites/saneamiento")
+    public String getListOfDocsSaneamiento(Model model) {
+        var tramites = tramiteRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+        model.addAttribute("tramites", tramites);
+        return "/tramites/saneamiento";
+    }
+
+
+    @GetMapping("tramites/saneamientoCrear")
+    public String createDocSaneamiento(Model model){
+        TramiteDto tramiteDto = new TramiteDto();
+        model.addAttribute("tramiteDto", tramiteDto);
+        return "tramites/saneamientoCrear";
+    }
+
+    @PostMapping("tramites/saneamientoCrear")
+    public String createDocSaneamiento(
+            @Valid @ModelAttribute TramiteDto tramiteDto,
+            BindingResult result,
+            Model model
+    ) {
+        if (result.hasErrors()) {
+            model.addAttribute("tramiteDto", tramiteDto);  // volver a enviar el DTO con errores
+            return "/tramites/saneamientoCrear";  // volver a la vista del formulario
+        }
+
+        Tramite tramite = new Tramite();
+        tramite.setNombre(tramiteDto.getNombre());
+        tramite.setDescripcion(tramiteDto.getDescripcion());
+
+        tramiteRepository.save(tramite);
+
+        return "redirect:/tramites/saneamiento";
+    }
+
+    @GetMapping("/tramites/titulacion")
+    public String getListOfDocsTitulacion(Model model) {
+        var tramites = tramiteRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+        model.addAttribute("tramites", tramites);
+        return "/tramites/titulacion";
+    }
+
+
+    @GetMapping("tramites/titulacionCrear")
+    public String createDocTitulacion(Model model){
+        TramiteDto tramiteDto = new TramiteDto();
+        model.addAttribute("tramiteDto", tramiteDto);
+        return "tramites/titulacionCrear";
+    }
+
+    @PostMapping("tramites/titulacionCrear")
+    public String createDocTitulacion(
+            @Valid @ModelAttribute TramiteDto tramiteDto,
+            BindingResult result,
+            Model model
+    ) {
+        if (result.hasErrors()) {
+            model.addAttribute("tramiteDto", tramiteDto);  // volver a enviar el DTO con errores
+            return "/tramites/titulacionCrear";  // volver a la vista del formulario
+        }
+
+        Tramite tramite = new Tramite();
+        tramite.setNombre(tramiteDto.getNombre());
+        tramite.setDescripcion(tramiteDto.getDescripcion());
+
+        tramiteRepository.save(tramite);
+
+        return "redirect:/tramites/titulacion";
+    }
 }

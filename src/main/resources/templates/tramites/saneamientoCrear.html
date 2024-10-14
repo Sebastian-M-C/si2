@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Categoria</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicon -->
+  <link th:href="@{/img/favicon.ico}" rel="icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css}" rel="stylesheet">
+  <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css}" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+  <link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" rel="stylesheet" />
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+
+  <style>
+    .category-card {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .category-name {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+<div class="container-xxl position-relative bg-white d-flex p-0">
+  <!-- Incluir Sidebar -->
+  <div th:replace="~{fragments :: sidebar}"></div>
+
+  <!-- Content Start -->
+  <div class="content">
+    <!-- Incluir Navbar -->
+    <div th:replace="~{fragments :: navbar}"></div>
+
+    <!-- Aquí va el contenido específico de la página -->
+    <div class="row">
+      <div class="col-md-8 mx-auto rounded border p-4">
+        <h2 class="text-center mb-5">Nuevo Tramite</h2>
+
+        <!-- El formulario -->
+        <form method="post" th:object="${tramiteDto}" th:action="@{/tramites/saneamientoCrear}">
+          <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">Nombre</label>
+            <div class="col-sm-8">
+              <input class="form-control" th:field="*{nombre}" />
+              <p th:if="${#fields.hasErrors('nombre')}"
+                 th:errorclass="text-danger"
+                 th:errors="*{nombre}"></p>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">Descripcion</label>
+            <div class="col-sm-8">
+              <input class="form-control" th:field="*{descripcion}" />
+              <p th:if="${#fields.hasErrors('descripcion')}"
+                 th:errorclass="text-danger"
+                 th:errors="*{descripcion}"></p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="offset-sm-4 col-sm-4 d-grid">
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+            <div class="col-sm-4 d-grid">
+              <a class="btn btn-outline-primary" th:href="@{/tramites/saneamiento}">Cancelar</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Fin del contenido específico -->
+  </div>
+  <!-- Content End -->
+
+  <!-- Incluir Footer -->
+  <div th:replace="~{fragments :: footer}"></div>
+</div>
+
+<!-- JavaScript Libraries -->
+<script th:src="@{https://code.jquery.com/jquery-3.4.1.min.js}"></script>
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/lib/chart/chart.min.js}"></script>
+<script th:src="@{/lib/easing/easing.min.js}"></script>
+<script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
+<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+<script th:src="@{/lib/tempusdominus/js/moment.min.js}"></script>
+<script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}"></script>
+<script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"></script>
+
+<!-- Template Javascript -->
+<script th:src="@{/js/main.js}"></script>
+
+<!-- Aquí van tus scripts -->
+</body>
+</html>
