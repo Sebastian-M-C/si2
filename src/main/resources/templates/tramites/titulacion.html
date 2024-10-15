@@ -71,6 +71,12 @@
                            onclick="return confirm('¿Estás seguro de eliminar este trámite?')">
                             Eliminar
                         </a>
+                        <!-- boton de iniciar tramite -->
+                        <a class="btn btn-primary btn-sm" th:href="@{/tramites/iniciar/{id}(id=${tramite.id})}">
+                            Iniciar Tramite
+                        </a>
+
+
                     </td>
                 </tr>
                 </tbody>
