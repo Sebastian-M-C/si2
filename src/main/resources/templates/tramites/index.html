@@ -42,10 +42,17 @@
             border-radius: 10px;
             text-align: center;
             font-size: 18px;
+            padding: 10px; /* Añadir algo de padding */
+        }
+
+        .category-card img {
+            max-width: 80%; /* Ajusta el ancho máximo de la imagen */
+            max-height: 80%; /* Ajusta la altura máxima */
+            object-fit: contain;
+            margin-bottom: 10px; /* Añadir margen inferior para separar el nombre */
         }
 
         .category-name {
-            margin-top: 10px;
             font-weight: bold;
             font-size: 16px;
             text-align: center;
@@ -65,28 +72,37 @@
 
         <!-- Aquí va el contenido específico de la página -->
         <div class="container mt-5">
+            <h1 class="text-center mb-3">Categorias</h1>
             <div class="row justify-content-center">
                 <div class="col-12 col-md-6 col-lg-3 text-center">
                     <div class="category-card">
-                        <a th:href="@{/tramites/catastro}">Imagen 1</a>
+                        <a th:href="@{/tramites/catastro}">
+                            <img src="https://static.vecteezy.com/system/resources/previews/004/974/808/non_2x/mix-icon-for-formalities-vector.jpg" alt="Catastro" />
+                        </a>
                     </div>
                     <p class="category-name">Catastro</p>
                 </div>
                 <div class="col-12 col-md-6 col-lg-3 text-center">
                     <div class="category-card">
-                        <a th:href="@{/tramites/saneamiento}">Imagen 2</a>
+                        <a th:href="@{/tramites/saneamiento}">
+                            <img src="https://static.vecteezy.com/system/resources/previews/020/688/962/non_2x/mix-icon-for-rule-vector.jpg" alt="Saneamiento" />
+                        </a>
                     </div>
                     <p class="category-name">Saneamiento</p>
                 </div>
                 <div class="col-12 col-md-6 col-lg-3 text-center">
                     <div class="category-card">
-                        <a th:href="@{/tramites/titulacion}">Imagen 3</a>
+                        <a th:href="@{/tramites/titulacion}">
+                            <img src="https://static.vecteezy.com/system/resources/previews/006/219/160/non_2x/mix-icon-for-licensees-vector.jpg" alt="Titulacion" />
+                        </a>
                     </div>
-                    <p class="category-name">Titulacion</p>
+                    <p class="category-name">Titulación</p>
                 </div>
                 <div class="col-12 col-md-6 col-lg-3 text-center">
                     <div class="category-card">
-                        <a th:href="@{/tramites/juridica}">Imagen 4</a>
+                        <a th:href="@{/tramites/juridica}">
+                            <img src="https://static.vecteezy.com/system/resources/previews/022/605/451/non_2x/mix-icon-for-rule-vector.jpg" alt="Jurídica" />
+                        </a>
                     </div>
                     <p class="category-name">Jurídica</p>
                 </div>

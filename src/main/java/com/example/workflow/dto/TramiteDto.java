@@ -1,11 +1,15 @@
 package com.example.workflow.dto;
 
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 public class TramiteDto {
 
     @NotEmpty(message = "El nombre es necesario")

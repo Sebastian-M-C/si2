@@ -1,6 +1,7 @@
 package com.example.workflow.controller;
 
 
+import com.example.workflow.dto.ClienteDto;
 import com.example.workflow.dto.TramiteDto;
 import com.example.workflow.entity.Categoria;
 import com.example.workflow.entity.Cliente;
@@ -15,7 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -256,4 +259,275 @@ public class TramiteController {
 
         return "redirect:/tramites/titulacion";  // Redirige a la lista de trámites jurídicos
     }
+//---------------------------------------------------------------------------------------------------------------------
+
+    @GetMapping("/tramites/editarCatastro/{id}")
+    public String editarTramiteCatastro(Model model, @PathVariable Long id) {
+        Tramite tramite = tramiteRepository.findById(id).orElse(null);
+        if (tramite == null) {
+            return "redirect:/tramites/catastro";
+        }
+
+        TramiteDto tramiteDto = new TramiteDto();
+        tramiteDto.setNombre(tramite.getNombre());
+        tramiteDto.setDescripcion(tramite.getDescripcion());
+        tramiteDto.setCategoria_id(tramite.getCategoria().getId());
+
+        model.addAttribute("tramite", tramite);
+        model.addAttribute("tramiteDto", tramiteDto);
+
+        return "/tramites/editarCatastro";
+    }
+
+    @PostMapping("/tramites/editarCatastro/{id}")
+    public String editarTramiteCatastro(
+            Model model,
+            @PathVariable Long id,
+            @Valid @ModelAttribute TramiteDto tramiteDto,
+            BindingResult result
+    ) {
+        Tramite tramite = tramiteRepository.findById(id).orElse(null);
+        if (tramite == null) {
+            return "redirect:/tramites/catastro";
+        }
+
+        if (result.hasErrors()) {
+            model.addAttribute("tramite", tramite);
+            return "/tramites/editarCatastro";
+        }
+
+        tramite.setNombre(tramiteDto.getNombre());
+        tramite.setDescripcion(tramiteDto.getDescripcion());
+
+        // Buscar la categoría por su ID y asignarla al trámite
+        Categoria categoria = categoriaRepository.findById(tramiteDto.getCategoria_id()).orElse(null);
+        if (categoria != null) {
+            tramite.setCategoria(categoria);
+        }
+
+        try {
+            tramiteRepository.save(tramite);
+        } catch (Exception ex) {
+            return "/tramites/editarCatastro";
+        }
+
+        return "redirect:/tramites/catastro";
+    }
+
+//--------------------------------------------------------------------------------------------------------
+
+    @GetMapping("/tramites/editarJuridica/{id}")
+    public String editarTramiteJuridica(Model model, @PathVariable Long id) {
+        Tramite tramite = tramiteRepository.findById(id).orElse(null);
+        if (tramite == null) {
+            return "redirect:/tramites/juridica";
+        }
+
+        TramiteDto tramiteDto = new TramiteDto();
+        tramiteDto.setNombre(tramite.getNombre());
+        tramiteDto.setDescripcion(tramite.getDescripcion());
+        tramiteDto.setCategoria_id(tramite.getCategoria().getId());
+
+        model.addAttribute("tramite", tramite);
+        model.addAttribute("tramiteDto", tramiteDto);
+
+        return "/tramites/editarJuridica";
+    }
+
+    @PostMapping("/tramites/editarJuridica/{id}")
+    public String editarTramiteJuridica(
+            Model model,
+            @PathVariable Long id,
+            @Valid @ModelAttribute TramiteDto tramiteDto,
+            BindingResult result
+    ) {
+        Tramite tramite = tramiteRepository.findById(id).orElse(null);
+        if (tramite == null) {
+            return "redirect:/tramites/juridica";
+        }
+
+        if (result.hasErrors()) {
+            model.addAttribute("tramite", tramite);
+            return "/tramites/editarJuridica";
+        }
+
+        tramite.setNombre(tramiteDto.getNombre());
+        tramite.setDescripcion(tramiteDto.getDescripcion());
+
+        // Buscar la categoría por su ID y asignarla al trámite
+        Categoria categoria = categoriaRepository.findById(tramiteDto.getCategoria_id()).orElse(null);
+        if (categoria != null) {
+            tramite.setCategoria(categoria);
+        }
+
+        try {
+            tramiteRepository.save(tramite);
+        } catch (Exception ex) {
+            return "/tramites/editarJuridica";
+        }
+
+        return "redirect:/tramites/juridica";
+    }
+
+//-----------------------------------------------------------------------------------------------------------------
+@GetMapping("/tramites/editarSaneamiento/{id}")
+public String editarTramiteSaneamiento(Model model, @PathVariable Long id) {
+    Tramite tramite = tramiteRepository.findById(id).orElse(null);
+    if (tramite == null) {
+        return "redirect:/tramites/saneamiento";
+    }
+
+    TramiteDto tramiteDto = new TramiteDto();
+    tramiteDto.setNombre(tramite.getNombre());
+    tramiteDto.setDescripcion(tramite.getDescripcion());
+    tramiteDto.setCategoria_id(tramite.getCategoria().getId());
+
+    model.addAttribute("tramite", tramite);
+    model.addAttribute("tramiteDto", tramiteDto);
+
+    return "/tramites/editarSaneamiento";
 }
+
+    @PostMapping("/tramites/editarSaneamiento/{id}")
+    public String editarTramiteSaneamiento(
+            Model model,
+            @PathVariable Long id,
+            @Valid @ModelAttribute TramiteDto tramiteDto,
+            BindingResult result
+    ) {
+        Tramite tramite = tramiteRepository.findById(id).orElse(null);
+        if (tramite == null) {
+            return "redirect:/tramites/saneamiento";
+        }
+
+        if (result.hasErrors()) {
+            model.addAttribute("tramite", tramite);
+            return "/tramites/editarSaneamiento";
+        }
+
+        tramite.setNombre(tramiteDto.getNombre());
+        tramite.setDescripcion(tramiteDto.getDescripcion());
+
+        // Buscar la categoría por su ID y asignarla al trámite
+        Categoria categoria = categoriaRepository.findById(tramiteDto.getCategoria_id()).orElse(null);
+        if (categoria != null) {
+            tramite.setCategoria(categoria);
+        }
+
+        try {
+            tramiteRepository.save(tramite);
+        } catch (Exception ex) {
+            return "/tramites/editarSaneamiento";
+        }
+
+        return "redirect:/tramites/saneamiento";
+    }
+
+//    -----------------------------------------------------------------------------------------------------------------
+
+    @GetMapping("/tramites/editarTitulacion/{id}")
+    public String editarTramiteTitulacion(Model model, @PathVariable Long id) {
+        Tramite tramite = tramiteRepository.findById(id).orElse(null);
+        if (tramite == null) {
+            return "redirect:/tramites/titulacion";
+        }
+
+        TramiteDto tramiteDto = new TramiteDto();
+        tramiteDto.setNombre(tramite.getNombre());
+        tramiteDto.setDescripcion(tramite.getDescripcion());
+        tramiteDto.setCategoria_id(tramite.getCategoria().getId());
+
+        model.addAttribute("tramite", tramite);
+        model.addAttribute("tramiteDto", tramiteDto);
+
+        return "/tramites/editarTitulacion";
+    }
+
+    @PostMapping("/tramites/editarTitulacion/{id}")
+    public String editarTramiteTitulacion(
+            Model model,
+            @PathVariable Long id,
+            @Valid @ModelAttribute TramiteDto tramiteDto,
+            BindingResult result
+    ) {
+        Tramite tramite = tramiteRepository.findById(id).orElse(null);
+        if (tramite == null) {
+            return "redirect:/tramites/titulacion";
+        }
+
+        if (result.hasErrors()) {
+            model.addAttribute("tramite", tramite);
+            return "/tramites/editarTitulacion";
+        }
+
+        tramite.setNombre(tramiteDto.getNombre());
+        tramite.setDescripcion(tramiteDto.getDescripcion());
+
+        // Buscar la categoría por su ID y asignarla al trámite
+        Categoria categoria = categoriaRepository.findById(tramiteDto.getCategoria_id()).orElse(null);
+        if (categoria != null) {
+            tramite.setCategoria(categoria);
+        }
+
+        try {
+            tramiteRepository.save(tramite);
+        } catch (Exception ex) {
+            return "/tramites/editarTitulacion";
+        }
+
+        return "redirect:/tramites/titulacion";
+    }
+
+//---------------------------------------------------------------------------------------------------------------------
+
+    @GetMapping("/tramites/catastro/eliminar")
+        public String eliminarTramiteCatastro(@RequestParam Long id) {
+        Tramite tramite = tramiteRepository.findById(id).orElse(null);
+
+        if (tramite != null) {
+            tramiteRepository.delete(tramite);
+        }
+        return "redirect:/tramites/catastro";
+    }
+
+    //-----------------------------------------------------------------------------------------------
+
+    @GetMapping("/tramites/saneamiento/eliminar")
+        public String eliminarTramiteSaneamiento(@RequestParam Long id) {
+            Tramite tramite = tramiteRepository.findById(id).orElse(null);
+
+            if (tramite != null) {
+                tramiteRepository.delete(tramite);
+             }
+         return "redirect:/tramites/saneamiento";
+    }
+
+//    --------------------------------------------------------------------------------------------
+
+    @GetMapping("/tramites/titulacion/eliminar")
+    public String eliminarTramiteTitulacion(@RequestParam Long id) {
+        Tramite tramite = tramiteRepository.findById(id).orElse(null);
+
+        if (tramite != null) {
+            tramiteRepository.delete(tramite);
+        }
+        return "redirect:/tramites/titulacion";
+    }
+
+//    ---------------------------------------------------------------------------------------------------------
+
+    @GetMapping("/tramites/juridica/eliminar")
+    public String eliminarTramiteJuridica(@RequestParam Long id) {
+        Tramite tramite = tramiteRepository.findById(id).orElse(null);
+
+        if (tramite != null) {
+            tramiteRepository.delete(tramite);
+        }
+        return "redirect:/tramites/juridica";
+    }
+
+}
+
+
+
+

@@ -113,9 +113,8 @@ public class ClienteControlador {
             );
             return "clientes/editar";
         }
-
-        return "redirect:/clientes";
-    }
+      return "redirect:/clientes";
+}
 
     @GetMapping("/eliminar")
     public String eliminarCliente(@RequestParam Long id){
