@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Catastro</title>
+    <title>Papeles</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -29,6 +29,35 @@
     <!-- Template Stylesheet -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
 
+    <style>
+        .category-card {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            padding: 10px; /* Añadir algo de padding */
+        }
+
+        .category-card img {
+            max-width: 80%; /* Ajusta el ancho máximo de la imagen */
+            max-height: 80%; /* Ajusta la altura máxima */
+            object-fit: contain;
+            margin-bottom: 10px; /* Añadir margen inferior para separar el nombre */
+        }
+
+        .category-name {
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -42,58 +71,6 @@
         <div th:replace="~{fragments :: navbar}"></div>
 
         <!-- Aquí va el contenido específico de la página -->
-        <div class="container my-3">
-            <h1 class="text-center mb-3">Lista de Trámites Catastro</h1>
-            <a class="btn btn-primary" th:href="@{/tramites/crear}">Nuevo Trámite</a>
-
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                <tr th:each="tramite : ${tramites}">
-                    <td th:text="${tramite.id}"></td>
-                    <td th:text="${tramite.nombre}"></td>
-                    <td th:text="${tramite.descripcion}"></td>
-
-                    <td style="white-space:nowrap">
-                        <!-- Editar -->
-<!--                        <a class="btn btn-primary btn-sm" th:href="@{/tramites/editar/{id}(id=${tramite.id})}">-->
-<!--                            Editar</a>-->
-
-<!--                        &lt;!&ndash; Eliminar &ndash;&gt;-->
-<!--                        <a class="btn btn-danger btn-sm" th:href="@{/tramites/catastro/eliminar/{id}(id=${tramite.id})}"-->
-<!--                           onclick="return confirm('¿Estás seguro de eliminar este trámite?')">-->
-<!--                            Eliminar-->
-<!--                        </a>-->
-                        <a class="btn btn-primary btn-sm" th:href="@{/tramites/editarCatastro/{id}(id=${tramite.id})}">
-                            Editar</a>
-
-                        <!-- Eliminar -->
-                        <a class="btn btn-danger btn-sm"
-                           th:href="@{/tramites/catastro/eliminar(id=${tramite.id})}"
-                           onclick="return confirm('¿Estás seguro de eliminar este trámite?')">
-                            Eliminar
-                        </a>
-
-                        <!-- boton de iniciar tramite -->
-                        <a class="btn btn-primary btn-sm" th:href="@{/tramites/iniciar/{id}(id=${tramite.id})}">
-                            Iniciar Tramite
-                        </a>
-
-                        <a class="btn btn-secondary btn-sm" th:href="@{/requisitos/papeles}">
-                            Requisitos
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
 
         <!-- Fin del contenido específico -->
     </div>
