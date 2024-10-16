@@ -10,3 +10,7 @@
  # (insert into categoria values &#40;3, 'Titulacion'&#41;)
 
  # (insert into categoria values &#40;4, 'Juridica'&#41;)
+
+
+#Acuerdense de cambiar primero la contraseña de su postgreSQL
+#No cambien nada más del properties, solo la contraseña.

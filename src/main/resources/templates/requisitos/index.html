@@ -21,7 +21,7 @@
 
     <!-- Libraries Stylesheet -->
     <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
-    <link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" rel="stylesheet"/>
+    <link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
@@ -42,96 +42,30 @@
         <div th:replace="~{fragments :: navbar}"></div>
 
         <!-- Aquí va el contenido específico de la página -->
-
-        <h1>  Requisitos del Trámite: <span th:text="${tramite.nombre}"></span></h1>
-        <div class="container" style="max-width: 70%; margin: 0 auto;">
-            <form action="#" method="post" enctype="multipart/form-data" class="mb-4">
-
-                <div class="mb-3">
-                    <label for="ci" class="form-label">CI</label>
-                    <input type="text" class="form-control" id="ci" name="ci" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="expedido" class="form-label">Expedido</label>
-                    <input type="text" class="form-control" id="expedido" name="expedido" required>
-                </div>
-
+        <div class="container" style="max-width: 600px; margin: 0 auto;">
+            <form th:action="@{/enviar-correo}" method="post">
+                <!-- Nombre -->
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="nombre" name="nombre" required>
                 </div>
 
+                <!-- Email -->
                 <div class="mb-3">
-                    <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
-                    <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno" required>
+                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
                 </div>
 
+                <!-- Mensaje -->
                 <div class="mb-3">
-                    <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
-                    <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno" required>
+                    <label for="mensaje" class="form-label">Mensaje</label>
+                    <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required></textarea>
                 </div>
 
-                <div class="mb-3">
-                    <label for="celular" class="form-label">Celular</label>
-                    <input type="text" class="form-control" id="celular" name="celular" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="correo" class="form-label">Correo Electrónico</label>
-                    <input type="email" class="form-control" id="correo" name="correo" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="numeroTitulo" class="form-label">Número de Título</label>
-                    <input type="text" class="form-control" id="numeroTitulo" name="numeroTitulo" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="deposito" class="form-label">Depósito</label>
-                    <input type="text" class="form-control" id="deposito" name="deposito" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="oficinadeposito" class="form-label">Oficina de Depósito</label>
-                    <input type="text" class="form-control" id="oficinadeposito" name="oficinadeposito" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="fotodeposito" class="form-label">Foto del Depósito</label>
-                    <input type="file" class="form-control" id="fotodeposito" name="fotodeposito" accept="image/*" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="fotofolio" class="form-label">Foto del Folio</label>
-                    <input type="file" class="form-control" id="fotofolio" name="fotofolio" accept="image/*" required>
-                </div>
-
+                <!-- Botón de Enviar -->
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
         </div>
-
-        <!--        <table class="table">-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--&lt;!&ndash;                <th>Nombre</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                <th>Descripción</th>&ndash;&gt;-->
-<!--                -->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--            <tr th:each="requisito : ${requisitos}">-->
-<!--                <td th:text="${requisito.nombre}"></td>-->
-<!--                <td th:text="${requisito.descripcion}"></td>-->
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--        </table>-->
-        <!--aqui va el formulario de requisitos-->
-
-
-
-
-
 
         <!-- Fin del contenido específico -->
     </div>
@@ -156,9 +90,7 @@
 <script th:src="@{/js/main.js}"></script>
 
 <!-- Aquí van tus scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
 </html>
