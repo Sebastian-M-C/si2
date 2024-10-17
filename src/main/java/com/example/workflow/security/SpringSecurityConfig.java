@@ -46,6 +46,7 @@ public class SpringSecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests((auth) -> auth
+                        // Primero defines todas las rutas específicas que quieres permitir sin autenticación
                         .requestMatchers(HttpMethod.GET, "/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/logout").permitAll()
                         .requestMatchers(HttpMethod.GET, "/usuarios").permitAll()
@@ -54,11 +55,8 @@ public class SpringSecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/backup").permitAll()
                         .requestMatchers(HttpMethod.POST, "/enviar-correo").permitAll()
                         .requestMatchers(HttpMethod.POST, "/bitacora/listarbitacora").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
-//                        .requestMatchers(HttpMethod.GET, "/api/reports/pdf").permitAll()
-//                        .requestMatchers(HttpMethod.GET, "/api/reports/excel").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/api/reports/send-email").permitAll()
-                        .anyRequest().authenticated())
+                        // Luego, permites el acceso a cualquier otra ruta sin autenticación
+                        .anyRequest().permitAll())
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))
                 .addFilter(new JwtValidationFilter(authenticationManager()))
                 .csrf(AbstractHttpConfigurer::disable)
