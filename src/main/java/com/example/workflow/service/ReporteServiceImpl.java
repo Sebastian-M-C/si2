@@ -28,9 +28,11 @@ public class ReporteServiceImpl implements ReporteService{
         //optener los tramites segun los filtros
         List<Tramite> tramites = tramiteRepository.findTramitesByFilters(clienteId, categoriaId,
                 fechaInicio, fechaFin);
+        System.out.println("Número de trámites encontrados: " + tramites.size());
 
-        InputStream reporteStream = this.getClass().getResourceAsStream("/reporte/reportes_tramites.jrxml");
+        InputStream reporteStream = this.getClass().getResourceAsStream("/reports/reporte_tramites.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(reporteStream);
+
 
         // mapear los datos a Jasperreports
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(tramites);
@@ -39,7 +41,7 @@ public class ReporteServiceImpl implements ReporteService{
 
         // rellenar el reporte
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-
+        System.out.println("Número de páginas en el reporte: " + jasperPrint.getPages().size());
         // exportar a PDF
         return JasperExportManager.exportReportToPdf(jasperPrint);
 

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
-              https://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
-              name="reporte_tramites"
-              pageWidth="595"
-              pageHeight="842"
-              columnWidth="555"
-              leftMargin="20"
-              rightMargin="20"
-              topMargin="20"
-              bottomMargin="20"
-              uuid="12345-abcd-67890">
+<jasperReport
+        name="reporte_tramites"
+        pageWidth="595"
+        pageHeight="842"
+        columnWidth="555"
+        leftMargin="20"
+        rightMargin="20"
+        topMargin="20"
+        bottomMargin="20">
+
+    <!-- Definición de campos -->
+    <field name="id" class="java.lang.Long"/>
+    <field name="nombre" class="java.lang.String"/>
+    <field name="clienteNombre" class="java.lang.String"/> <!-- Ver más sobre cómo obtener esto -->
 
     <!-- Título del Reporte -->
     <title>
@@ -56,12 +57,12 @@
             <textField>
                 <reportElement x="100" y="0" width="200" height="20"/>
                 <textElement textAlignment="Left"/>
-                <textFieldExpression><![CDATA[$F{nombreTramite}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="300" y="0" width="255" height="20"/>
                 <textElement textAlignment="Left"/>
-                <textFieldExpression><![CDATA[$F{clienteNombre}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{clienteNombre}]]></textFieldExpression> <!-- Usando el nuevo campo -->
             </textField>
         </band>
     </detail>

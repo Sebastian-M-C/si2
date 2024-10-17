@@ -8,12 +8,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
-@Entity
 @Data
-@Table(name = "tramite")
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Entity
+@Table(name = "tramite")
 public class Tramite implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,4 +42,9 @@ public class Tramite implements Serializable {
 
     @OneToMany(mappedBy = "tramite", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Requisito> requisitos;
+
+    public String getClienteNombre() {
+        return cliente != null ? cliente.getNombre() : "No disponible"; // Asegúrate de que Cliente tenga el método getNombre()
+    }
+
 }

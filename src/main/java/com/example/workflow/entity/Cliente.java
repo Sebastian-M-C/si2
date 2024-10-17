@@ -1,20 +1,21 @@
 package com.example.workflow.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Data
 @Table(name = "cliente")
-public class Cliente {
+public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,16 +36,6 @@ public class Cliente {
     private List<Tramite> tramites = new ArrayList<>();  // Lista de trámites que el cliente ha iniciado
 
 
-    public Cliente(Long id, String nombre, String apellido, String email, String status, Date createAt) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.status = status;
-        this.createAt = createAt;
-    }
 
-    public Cliente() {
-    }
 
 }

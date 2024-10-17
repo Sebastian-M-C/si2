@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public interface ReporteService {
 
-    String estado = "EN_PROCESO"; // Aquí pasas como String
+    //String estado = "EN_PROCESO"; // Aquí pasas como String
     byte[] generarReporteTramites(Long clienteId, Long categoriaId,
                                    LocalDate fechaInicio,
                                   LocalDate fechaFin) throws JRException;
