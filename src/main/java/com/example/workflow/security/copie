@@ -7,12 +7,10 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -45,32 +43,20 @@ public class SpringSecurityConfig {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests((auth) -> auth
-                        .requestMatchers(HttpMethod.GET, "/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/logout").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/usuarios").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/usuarios/registrar").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/backup").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/enviar-correo").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/reportes/tramites").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
-//                        .requestMatchers(HttpMethod.GET, "/api/reports/pdf").permitAll()
-//                        .requestMatchers(HttpMethod.GET, "/api/reports/excel").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/api/reports/send-email").permitAll()
-                        .anyRequest().authenticated())
-                .addFilter(new JwtAuthenticationFilter(authenticationManager()))
-                .addFilter(new JwtValidationFilter(authenticationManager()))
-                .csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        return http
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().permitAll()  // Permite acceso a todas las rutas sin autenticación
+                )
+                .csrf(AbstractHttpConfigurer::disable)  // Desactiva CSRF
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))  // Configuración de CORS
+                .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Configura sin sesiones (stateless)
                 .build();
     }
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:4200"));
+        config.setAllowedOrigins(List.of("http://localhost:4200"));  // Ajusta a tus necesidades
         config.setAllowedOriginPatterns(List.of("*"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT"));
         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
