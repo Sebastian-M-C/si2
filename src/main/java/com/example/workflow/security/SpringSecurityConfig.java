@@ -53,7 +53,7 @@ public class SpringSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
                         .requestMatchers(HttpMethod.GET, "/backup").permitAll()
                         .requestMatchers(HttpMethod.POST, "/enviar-correo").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/bitacoras/listarbitacora").permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/api/reports/pdf").permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/api/reports/excel").permitAll()
 //                        .requestMatchers(HttpMethod.POST, "/api/reports/send-email").permitAll()

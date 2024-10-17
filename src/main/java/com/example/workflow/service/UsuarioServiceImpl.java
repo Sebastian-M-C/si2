@@ -1,10 +1,13 @@
 package com.example.workflow.service;
 
+import com.example.workflow.dto.UsuarioRegistroDto;
 import com.example.workflow.entity.Role;
 import com.example.workflow.entity.Usuario;
 import com.example.workflow.repository.RoleRepository;
 import com.example.workflow.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,4 +58,29 @@ public class UsuarioServiceImpl implements UsuarioService{
         return repository.existsByUsername(usuario);
     }
 
+    @Override
+    public Usuario guardar(UsuarioRegistroDto registroDto) {
+        return null;
+    }
+
+    @Override
+    public List<Usuario> listarUsuarios() {
+        return List.of();
+    }
+
+    @Override
+    public Usuario encontrarPorNombreUsuario(String nombreUsuario) {
+        return null;
+    }
+
+    @Override
+    public Long obtenerIdUsuarioPorNombre(String nombreUsuario) {
+        return 0L;
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
+    }
 }
