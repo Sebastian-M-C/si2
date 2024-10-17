@@ -28,7 +28,7 @@ public class Tramite implements Serializable {
     private EstadoTramite estado;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @JoinColumn(name = "cliente_id", nullable = true)
     private Cliente cliente;
 
     @OneToMany(mappedBy = "tramite")
