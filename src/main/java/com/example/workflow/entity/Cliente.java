@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Setter
 @Getter
@@ -27,6 +29,10 @@ public class Cliente {
     private String status;
     @Column(nullable = false)
     private Date createAt;
+
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Tramite> tramites = new ArrayList<>();  // Lista de trámites que el cliente ha iniciado
 
 
     public Cliente(Long id, String nombre, String apellido, String email, String status, Date createAt) {
