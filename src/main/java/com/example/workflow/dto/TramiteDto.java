@@ -1,5 +1,7 @@
 package com.example.workflow.dto;
 
+import com.example.workflow.entity.Cliente;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import lombok.Getter;
@@ -17,4 +19,6 @@ public class TramiteDto {
     @NotEmpty(message = "La descripcion es necesario")
     public String descripcion;
     private Long categoria_id;
+    @Column(nullable = true)
+    private Cliente cliente_id;
 }
