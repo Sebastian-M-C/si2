@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Coordenadas en Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <style>
+        /* Configuración general */
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Contenedor principal */
+        #container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        /* Caja de búsqueda en la parte superior */
+        #search-box {
+            padding: 10px;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        /* Mapa ocupa el resto del espacio */
+        #map {
+            flex: 1;
+            width: 100%;
+        }
+
+        /* Estilos para la ventana modal */
+        .modal {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Contenedor principal -->
+<div id="container">
+    <!-- Caja de búsqueda de coordenadas -->
+    <div id="search-box">
+        <input type="text" id="latitud" placeholder="Latitud -> -17.783269" />
+        <input type="text" id="longitud" placeholder="Longitud -> -63.182144" />
+        <button onclick="buscarCoordenadas()">Buscar</button>
+        <button onclick="abrirModal()">Información</button>
+    </div>
+
+    <!-- Contenedor del mapa -->
+    <div id="map"></div>
+</div>
+
+<!-- Ventana Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <h2>Cómo usar el sistema</h2>
+        <p>1. Ingresa las coordenadas de latitud y longitud en los campos proporcionados.</p>
+        <p>2. Al hacer click derecho en google maps te dara la longitud y latitud, se verá de esta manera (-17.783269, -63.182144).</p>
+        <p>3. De manera separada lo colocas en los cuadros correspondiente y al presionar buscar le dara la posicion de las cordernas.</p>
+    </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+<script>
+    // Inicializar el mapa centrado en una ubicación predeterminada
+    var map = L.map('map').setView([-17.7833, -63.1821], 13);
+
+    // Cargar la capa base de OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Variable para el marcador (si queremos actualizarlo en cada búsqueda)
+    var marker;
+
+    // Función para buscar y centrar en coordenadas específicas
+    function buscarCoordenadas() {
+        var lat = document.getElementById("latitud").value;
+        var lng = document.getElementById("longitud").value;
+
+        if (lat && lng) {
+            var latNum = parseFloat(lat);
+            var lngNum = parseFloat(lng);
+
+            if (!isNaN(latNum) && !isNaN(lngNum)) {
+                map.setView([latNum, lngNum], 13);
+
+                if (marker) {
+                    marker.setLatLng([latNum, lngNum]);
+                } else {
+                    marker = L.marker([latNum, lngNum]).addTo(map);
+                }
+
+                marker.bindPopup(`Ubicación: [${latNum}, ${lngNum}]`).openPopup();
+            } else {
+                alert("Por favor, ingresa números válidos para latitud y longitud.");
+            }
+        } else {
+            alert("Por favor, ingresa ambas coordenadas: latitud y longitud.");
+        }
+    }
+
+    // Funciones para abrir y cerrar la ventana modal
+    function abrirModal() {
+        document.getElementById("modal").style.display = "block";
+    }
+
+    function cerrarModal() {
+        document.getElementById("modal").style.display = "none";
+    }
+
+    // Cerrar la modal al hacer clic fuera del contenido de la modal
+    window.onclick = function(event) {
+        var modal = document.getElementById("modal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>
