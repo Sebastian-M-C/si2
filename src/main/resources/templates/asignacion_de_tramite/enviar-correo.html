@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Juridica</title>
+    <title>Lista de Trámites de Catastro</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -11,9 +11,9 @@
     <link th:href="@{/img/favicon.ico}" rel="icon">
 
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap}" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css}" rel="stylesheet">
@@ -28,7 +28,6 @@
 
     <!-- Template Stylesheet -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
-
 </head>
 
 <body>
@@ -42,52 +41,6 @@
         <div th:replace="~{fragments :: navbar}"></div>
 
         <!-- Aquí va el contenido específico de la página -->
-        <div class="container my-3">
-            <h1 class="text-center mb-3">Lista de Trámites Juridica</h1>
-            <a class="btn btn-primary" th:href="@{/tramites/juridicaCrear}">Nuevo Trámite</a>
-
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                <tr th:each="tramite : ${tramites}">
-                    <td th:text="${tramite.id}"></td>
-                    <td th:text="${tramite.nombre}"></td>
-                    <td th:text="${tramite.descripcion}"></td>
-
-                    <td style="white-space:nowrap">
-                        <!-- Editar -->
-                        <a class="btn btn-primary btn-sm" th:href="@{/tramites/editarJuridica/{id}(id=${tramite.id})}">
-                            Editar</a>
-
-                        <!-- Eliminar -->
-                        <a class="btn btn-danger btn-sm"
-                           th:href="@{/tramites/juridica/eliminar(id=${tramite.id})}"
-                           onclick="return confirm('¿Estás seguro de eliminar este trámite?')">
-                            Eliminar
-                        </a>
-
-
-                        <!-- boton de iniciar tramite -->
-                        <a class="btn btn-primary btn-sm" th:href="@{/tramites/iniciar/{id}(id=${tramite.id})}">
-                            Iniciar Tramite
-                        </a>
-
-                        <a class="btn btn-secondary btn-sm" th:href="@{/requisitos/papelesJ}">
-                            Requisitos
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
         <!-- Fin del contenido específico -->
     </div>
     <!-- Content End -->
@@ -109,8 +62,7 @@
 <!-- Template Javascript -->
 <script th:src="@{/js/main.js}"></script>
 
-<!-- Aquí van tus scripts -->
+<!-- Bootstrap JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
 </body>
 </html>

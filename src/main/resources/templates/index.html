@@ -75,7 +75,6 @@
                             <a th:href="@{/tramites}" class="dropdown-item">Categoria</a>
                             <a th:href="@{#}" class="dropdown-item">Verificar Documento</a>
                             <a th:href="@{#}" class="dropdown-item">Gestionar nuevos Tramites</a>
-                            <a th:href="@{#}" class="dropdown-item">Verificar Documento</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
@@ -92,8 +91,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Reportes</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="signin.html" class="dropdown-item">Emitir Título</a>
-                            <a href="signup.html" class="dropdown-item">Verificar Estado</a>
-                            <a href="404.html" class="dropdown-item">Bitacora</a>
+                            <a th:href="@{/asignacion_de_tramite/enviar-correo}" class="dropdown-item">Asignacion de tramites</a>
                             <a th:href="@{/catastro}" class="dropdown-item">Catastro</a>
                             <a href="blank.html" class="dropdown-item">Historial Tramite</a>
                             <a href="hola.html" class="dropdown-item">Archivar Tramite</a>
@@ -307,7 +305,6 @@
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/chart/chart.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
@@ -315,7 +312,7 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
