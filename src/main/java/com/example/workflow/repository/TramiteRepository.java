@@ -15,6 +15,10 @@ public interface TramiteRepository extends JpaRepository<Tramite, Long> {
     List<Tramite> findByCategoriaId(Long categoriaId);
     List<Tramite> findByEstado(String estado); //buscar tramites por estado
 
+    @Query("SELECT t FROM Tramite t JOIN FETCH t.cliente")
+    List<Tramite> findAllWithClientes();
+
+
     @Query("SELECT t FROM Tramite t WHERE (:clienteId IS NULL OR t.cliente.id = :clienteId) "
             + "AND (:categoriaId IS NULL OR t.categoria.id = :categoriaId) "
             + "AND (cast(:fechaInicio as date) IS NULL OR t.fechaInicio >= :fechaInicio) "

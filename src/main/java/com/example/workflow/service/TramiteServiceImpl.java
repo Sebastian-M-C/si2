@@ -6,6 +6,7 @@ import com.example.workflow.repository.TramiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -40,6 +41,11 @@ public class TramiteServiceImpl implements TramiteService{
     public Optional<Tramite> findTramiteByID(Long id) {
         return tramiteRepository.findById(id);
     }
+
+
+
+
+
 
 }
 

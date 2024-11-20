@@ -35,7 +35,4 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tramite> tramites = new ArrayList<>();  // Lista de trámites que el cliente ha iniciado
 
-
-
-
 }

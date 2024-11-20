@@ -34,8 +34,6 @@ public class Tramite implements Serializable {
     @OneToMany(mappedBy = "tramite")
     private Set<ClienteTramite> clienteTramites;
 
-
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id")  // FK en la tabla 'tramite'
     private Categoria categoria;
