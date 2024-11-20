@@ -70,6 +70,22 @@ public class MonitoreoPlazosController {
     }
 
 
+    @GetMapping("/buscar")
+    public String buscarTramites(@RequestParam(name = "busqueda", required = false) String busqueda, Model model) {
+        List<Tramite> tramites;
+
+        if (busqueda != null && !busqueda.isEmpty()) {
+            tramites = tramiteService.buscarPorNombreOCliente(busqueda);
+        } else {
+            tramites = tramiteService.obtenerTodos();
+        }
+
+        model.addAttribute("tramites", tramites);
+        model.addAttribute("busqueda", busqueda);
+        return "monitoreo/index"; // Nombre de la plantilla HTML
+    }
+
+
 
 
 }

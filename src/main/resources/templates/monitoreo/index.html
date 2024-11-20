@@ -44,15 +44,20 @@
         <div class="container my-3">
             <h1 class="text-center mb-3">Monitoreo de Trámites y Plazos</h1>
 
-<!--            <div class="row my-3">-->
-<!--                <div class="col-md-6">-->
-<!--                    <input type="text" class="form-control" placeholder="Buscar por cliente o trámite..."-->
-<!--                           th:value="${busqueda}">-->
-<!--                </div>-->
-<!--                <div class="col-md-6 text-end">-->
-<!--                    <button class="btn btn-primary">Filtrar</button>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!-- Formulario de búsqueda -->
+            <div class="row my-3">
+                <form th:action="@{/monitoreo/buscar}" method="get" class="d-flex">
+                    <div class="col-md-6">
+                        <input type="text" name="busqueda" class="form-control" placeholder="Buscar por cliente o trámite..."
+                               th:value="${busqueda}">
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <button type="submit" class="btn btn-primary">Filtrar</button>
+                        <!-- Botón Listar -->
+                        <a href="#" th:href="@{/monitoreo}" class="btn btn-secondary ms-2">Listar</a>
+                    </div>
+                </form>
+            </div>
 
             <!-- Tabla de trámites -->
             <table class="table table-striped">
@@ -63,32 +68,15 @@
                     <th>Estado</th>
                     <th>Fecha Inicio</th>
                     <th>Fecha Final</th>
-<!--                    <th>Acciones</th>-->
                 </tr>
                 </thead>
                 <tbody class="table-group-divider">
                 <tr th:each="tramite : ${tramites}">
-                    <!-- ID del trámite -->
                     <td th:text="${tramite.nombre}"></td>
-
-                    <!-- Nombre del cliente -->
                     <td th:text="${tramite.cliente.nombre}"></td>
-
-                    <!-- Nombre del estado -->
                     <td th:text="${tramite.estado}"></td>
-
-                    <!-- Fecha de inicio -->
                     <td th:text="${tramite.fechaInicio}"></td>
-
-                    <!-- Fecha final -->
                     <td th:text="${tramite.fechaFin}"></td>
-
-<!--                    &lt;!&ndash; Botón de detalles &ndash;&gt;-->
-<!--                    <td>-->
-<!--                        <a class="btn btn-primary btn-sm" th:href="@{/monitoreo/detalle/{id}(id=${tramite.id})}">-->
-<!--                            Detalles-->
-<!--                        </a>-->
-<!--                    </td>-->
                 </tr>
                 </tbody>
             </table>

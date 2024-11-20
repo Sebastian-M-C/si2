@@ -42,6 +42,16 @@ public class TramiteServiceImpl implements TramiteService{
         return tramiteRepository.findById(id);
     }
 
+    @Override
+    public List<Tramite> buscarPorNombreOCliente(String busqueda) {
+        return tramiteRepository.findByNombreContainingIgnoreCaseOrCliente_NombreContainingIgnoreCase(busqueda, busqueda);
+    }
+
+    @Override
+    public List<Tramite> obtenerTodos() {
+        return tramiteRepository.findAll();
+    }
+
 
 
 

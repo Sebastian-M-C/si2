@@ -15,4 +15,9 @@ public interface TramiteService {
     Optional<Tramite> findTramiteByID(Long id);
 
 
+    List<Tramite> buscarPorNombreOCliente(String busqueda);
+
+    List<Tramite> obtenerTodos();
+
+
 }

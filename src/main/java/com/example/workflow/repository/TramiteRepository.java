@@ -18,6 +18,9 @@ public interface TramiteRepository extends JpaRepository<Tramite, Long> {
     @Query("SELECT t FROM Tramite t JOIN FETCH t.cliente")
     List<Tramite> findAllWithClientes();
 
+    List<Tramite> findByNombreContainingIgnoreCaseOrCliente_NombreContainingIgnoreCase(String nombreTramite, String nombreCliente);
+
+
 
     @Query("SELECT t FROM Tramite t WHERE (:clienteId IS NULL OR t.cliente.id = :clienteId) "
             + "AND (:categoriaId IS NULL OR t.categoria.id = :categoriaId) "
