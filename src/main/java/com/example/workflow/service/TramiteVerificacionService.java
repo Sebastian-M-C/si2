@@ -27,6 +27,14 @@ public class TramiteVerificacionService {
         return tramiteRepository.findByEstadoDocumentosRechazado();
     }
 
+    public Tramite getTramiteById(Long id) {
+        return tramiteRepository.findById(id).orElseThrow(() -> new RuntimeException("Trámite no encontrado"));
+    }
+
+    public void guardarTramite(Tramite tramite) {
+        tramiteRepository.save(tramite);
+    }
+
     // Método para aprobar el trámite
     public void aprobarTramite(Long tramiteId) {
         Tramite tramite = tramiteRepository.findById(tramiteId)

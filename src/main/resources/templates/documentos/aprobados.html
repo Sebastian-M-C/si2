@@ -51,7 +51,9 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Descripción</th>
+                    <th>Estado</th>
                     <th>Observaciones</th>
+                    <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,7 +61,11 @@
                     <td th:text="${tramite.id}"></td>
                     <td th:text="${tramite.nombre}"></td>
                     <td th:text="${tramite.descripcion}"></td>
+                    <td th:text="${tramite.estado}"></td>
                     <td>Sin observaciones</td>
+                    <td>
+                        <a th:href="@{'/documentos/estado/' + ${tramite.id}}" class="btn btn-info btn-sm">Añadir Estado</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

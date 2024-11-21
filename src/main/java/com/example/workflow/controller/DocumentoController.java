@@ -1,5 +1,6 @@
 package com.example.workflow.controller;
 
+import com.example.workflow.entity.EstadoTramite;
 import com.example.workflow.entity.Requisito;
 import com.example.workflow.entity.Tramite;
 import com.example.workflow.service.TramiteService;
@@ -24,23 +25,6 @@ public class DocumentoController {
 
     @Autowired
     private TramiteVerificacionService tramiteVerificacionService;
-
-//    @GetMapping("/documentos")
-//    public String mostrarFormulario() {
-//        return "documentos/index";
-//    }
-
-//    @GetMapping("/documentos")
-//    public String mostrarFormulario(Model model) {
-//        // Llamamos al servicio para obtener la lista de trámites
-//        List<Tramite> tramites = tramiteService.obtenerTodos();
-//
-//        // Agregamos la lista de trámites al modelo para pasarlos a la vista
-//        model.addAttribute("tramites", tramites);
-//
-//        // Devolvemos la vista
-//        return "documentos/index";
-//    }
 
     @GetMapping("/documentos")
     public String listarTramitesSinEstado(Model model) {
@@ -94,5 +78,21 @@ public class DocumentoController {
     public String rechazarTramite(@PathVariable("id") Long tramiteId, @RequestParam("observacion") String observacion) {
         tramiteVerificacionService.rechazarTramite(tramiteId, observacion);
         return "redirect:/documentos";
+    }
+
+    @GetMapping("/documentos/estado/{id}")
+    public String mostrarEstado(@PathVariable Long id, Model model) {
+        Tramite tramite = tramiteVerificacionService.getTramiteById(id);
+        model.addAttribute("tramite", tramite);
+        model.addAttribute("estados", EstadoTramite.values()); // Enviar todos los estados posibles
+        return "documentos/estado";
+    }
+
+    @PostMapping("/documentos/estado/{id}")
+    public String actualizarEstado(@PathVariable Long id, @RequestParam("estado") EstadoTramite estado) {
+        Tramite tramite = tramiteVerificacionService.getTramiteById(id);
+        tramite.setEstado(estado); // Actualizar el estado del trámite
+        tramiteVerificacionService.guardarTramite(tramite);
+        return "redirect:/documentos/aprobados"; // Redirigir a la lista de trámites
     }
 }
