@@ -19,5 +19,5 @@ public interface TramiteService {
 
     List<Tramite> obtenerTodos();
 
-
+    public Tramite obtenerPorId(Long tramiteId);
 }

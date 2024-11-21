@@ -30,4 +30,13 @@ public interface TramiteRepository extends JpaRepository<Tramite, Long> {
                                         @Param("categoriaId") Long categoriaId,
                                         @Param("fechaInicio") LocalDate fechaInicio,
                                         @Param("fechaFin") LocalDate fechaFin);
+
+    @Query("SELECT t FROM Tramite t WHERE t.estadoDocumentos IS NULL")
+    List<Tramite> findByEstadoDocumentosIsNull();
+
+    @Query("SELECT t FROM Tramite t WHERE t.estadoDocumentos = 'APROBADO'")
+    List<Tramite> findByEstadoDocumentosAprobado();
+
+    @Query("SELECT t FROM Tramite t WHERE t.estadoDocumentos = 'RECHAZADO'")
+    List<Tramite> findByEstadoDocumentosRechazado();
 }

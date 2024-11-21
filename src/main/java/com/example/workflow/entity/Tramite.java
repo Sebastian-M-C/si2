@@ -27,6 +27,14 @@ public class Tramite implements Serializable {
     @Enumerated(EnumType.STRING)
     private EstadoTramite estado;
 
+    // Nuevo atributo para simplificar
+    @Enumerated(EnumType.STRING)
+    private EstadoDocumentos estadoDocumentos;
+
+    private boolean documentosCompletos;
+
+    private String motivoRechazo; // Opcional para casos de rechazo
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id", nullable = true)
     private Cliente cliente;
@@ -43,6 +51,23 @@ public class Tramite implements Serializable {
 
     public String getClienteNombre() {
         return cliente != null ? cliente.getNombre() : "No disponible"; // Asegúrate de que Cliente tenga el método getNombre()
+    }
+
+    // Getters y setters
+    public EstadoDocumentos getEstadoDocumentos() {
+        return estadoDocumentos;
+    }
+
+    public void setEstadoDocumentos(EstadoDocumentos estadoDocumentos) {
+        this.estadoDocumentos = estadoDocumentos;
+    }
+
+    public String getMotivoRechazo() {
+        return motivoRechazo;
+    }
+
+    public void setMotivoRechazo(String motivoRechazo) {
+        this.motivoRechazo = motivoRechazo;
     }
 
 }

@@ -52,10 +52,11 @@ public class TramiteServiceImpl implements TramiteService{
         return tramiteRepository.findAll();
     }
 
-
-
-
-
+    @Override
+    public Tramite obtenerPorId(Long tramiteId) {
+        return tramiteRepository.findById(tramiteId)
+                .orElseThrow(() -> new RuntimeException("Trámite no encontrado"));
+    }
 
 }
 
