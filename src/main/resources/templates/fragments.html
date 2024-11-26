@@ -35,7 +35,7 @@
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt m-2"></i>Recepción Tramites</a>
                     <div class="dropdown-menu bg-transparent border-0">
                         <a th:href="@{/tramites}" class="dropdown-item">Categoria</a>
-                        <a th:href="@{#}" class="dropdown-item">Verificar Documento</a>
+                        <a th:href="@{/documentos}" class="dropdown-item">Verificar Documento</a>
                         <a th:href="@{#}" class="dropdown-item">Gestionar nuevos Tramites</a>
 <!--                        <a th:href="@{#}" class="dropdown-item">Verificar Documento</a>-->
                         <a th:href="@{/monitoreo}" class="dropdown-item">Monitoreo</a>
@@ -57,7 +57,7 @@
                         <a href="signin.html" class="dropdown-item">Emitir Título</a>
                         <a th:href="@{/asignacion_de_tramite/enviar-correo}" class="dropdown-item">Asignacion de tramites</a>
                         <a th:href="@{/catastro}" class="dropdown-item">Catastro</a>
-                        <a href="blank.html" class="dropdown-item">Historial Tramite</a>
+                        <a th:href="@{/docs/create}" class="dropdown-item">Acta de Entrega</a>
                         <a href="hola.html" class="dropdown-item">Archivar Tramite</a>
                     </div>
                 </div>

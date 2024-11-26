@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Google Document</title>
+</head>
+<body>
+<h1>Edit Google Document</h1>
+
+<!-- Mensajes de éxito o error -->
+<div th:if="${message}" style="color: green;">[[${message}]]</div>
+<div th:if="${error}" style="color: red;">[[${error}]]</div>
+
+<!-- Formulario para cargar el contenido del documento -->
+<form th:action="@{/docs/load}" method="get">
+    <label for="documentId">Document ID:</label>
+    <input type="text" id="documentId" name="documentId" th:value="${documentId}" required>
+    <button type="submit">Load Document</button>
+</form>
+
+<!-- Formulario para actualizar el contenido del documento -->
+<form th:action="@{/docs/update}" method="post">
+    <input type="hidden" name="documentId" th:value="${documentId}">
+    <label for="content">Edit Content:</label>
+    <textarea id="content" name="content" rows="20" cols="100" th:text="${documentContent}"></textarea>
+    <br />
+    <button type="submit">Update Document</button>
+</form>
+</body>
+</html>

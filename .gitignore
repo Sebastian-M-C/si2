@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Ignorar credenciales y archivos de configuración sensibles
+*.json
+*.env
+src/main/resources/google-credentials.json
+
+
