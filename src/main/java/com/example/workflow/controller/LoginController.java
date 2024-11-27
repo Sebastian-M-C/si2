@@ -29,10 +29,10 @@ public class LoginController {
 //    public String showDashboard() {
 //        return "index"; // El dashboard principal
 //    }
-    @GetMapping("/login")
-    public String showLoginForm() {
-        return "login"; // Renderiza login.html
-    }
+//    @GetMapping("/login")
+//    public String showLoginForm() {
+//        return "login"; // Renderiza login.html
+//    }
 
     @GetMapping("/index")
     public String showDashboard() {

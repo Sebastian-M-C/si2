@@ -73,7 +73,7 @@
                 <tbody class="table-group-divider">
                 <tr th:each="tramite : ${tramites}">
                     <td th:text="${tramite.nombre}"></td>
-                    <td th:text="${tramite.cliente.nombre}"></td>
+                    <td th:text="${tramite.cliente.nombre +'   '+ tramite.cliente.apellido}"></td>
                     <td th:text="${tramite.estado}"></td>
                     <td th:text="${tramite.fechaInicio}"></td>
                     <td th:text="${tramite.fechaFin}"></td>

@@ -39,6 +39,11 @@
                         <a th:href="@{#}" class="dropdown-item">Gestionar nuevos Tramites</a>
 <!--                        <a th:href="@{#}" class="dropdown-item">Verificar Documento</a>-->
                         <a th:href="@{/monitoreo}" class="dropdown-item">Monitoreo</a>
+
+<!--                        añadi aqui lo de historialtramite&ndash;&gt;-->
+                        <a th:href="@{/historialTramite}" class="dropdown-item">Historial Tramite</a>
+
+
                     </div>
                 </div>
                 <div class="nav-item dropdown">
@@ -61,7 +66,7 @@
                         <a href="hola.html" class="dropdown-item">Archivar Tramite</a>
                     </div>
                 </div>
-                <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Cerrar Sesión</a>
+                <a th:href="@{/logout}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Cerrar Sesión</a>
             </div>
         </nav>
     </div>

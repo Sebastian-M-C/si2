@@ -11,9 +11,9 @@
     <link th:href="@{/img/favicon.ico}" rel="icon">
 
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap}" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css}" rel="stylesheet">
@@ -40,40 +40,51 @@
         <!-- Incluir Navbar -->
         <div th:replace="~{fragments :: navbar}"></div>
 
-        <!-- Aquí va el contenido específico de la página -->
-        <div class="container">
-            <!-- Sección de Bitácora -->
-            <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Lista de Bitácoras</h4>
-                        <div class="table-responsive pt-3">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Usuario</th>
-                                        <th>Evento</th>
-                                        <th>Fecha</th>
-                                        <th>Detalle de dispositivo</th>
-                                        <th>Ip</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr th:each="bitacora : ${bitacora}">
-                                        <td th:text="${bitacora.usuario.email}">Usuario</td>
-                                        <td th:text="${bitacora.evento}">Evento</td>
-                                        <td th:text="${bitacora.fecha}">Fecha</td>
-                                        <td th:text="${bitacora.detalle}">Detalle de dispositivo</td>
-                                        <td th:text="${bitacora.ip}">Ip</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Contenedor principal -->
+        <div class="container my-3">
+            <h1 class="text-center mb-3">Historial Tramite</h1>
+
+            <!-- Formulario de búsqueda -->
+<!--            <div class="row my-3">-->
+<!--                <form th:action="@{/historialTramite/buscar}" method="get" class="d-flex">-->
+<!--                    <div class="col-md-6">-->
+<!--                        <input type="text" name="busqueda" class="form-control" placeholder="Buscar por cliente o trámite..."-->
+<!--                               th:value="${busqueda}">-->
+<!--                    </div>-->
+<!--                    <div class="col-md-6 text-end">-->
+<!--                        <button type="submit" class="btn btn-primary">Filtrar</button>-->
+<!--                        &lt;!&ndash; Botón Listar &ndash;&gt;-->
+<!--                        <a href="#" th:href="@{/historialTramite}" class="btn btn-secondary ms-2">Listar</a>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+
+
+            <!-- Tabla de trámites -->
+            <table class="table table-striped">
+                <thead class="table-primary">
+                <tr>
+                    <th>Departamento</th>
+                    <th>Estado del Trámite</th>
+                    <th>Fecha</th>
+                    <th>Nombre del Cliente</th>
+                    <th>Nombre del Trámite</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr th:each="historial : ${historiales}">
+                    <td th:text="${historial.departamento}"></td>
+                    <td th:text="${historial.estado}"></td>
+                    <td th:text="${historial.fechaRegistro}"></td>
+                    <td th:text="${historial.tramite.cliente.nombre + ' ' + historial.tramite.cliente.apellido}"></td>
+                    <td th:text="${historial.tramite.nombre}"></td>
+                </tr>
+
+                </tbody>
+            </table>
+
+
         </div>
-        <!-- Fin del contenido específico -->
     </div>
     <!-- Content End -->
 

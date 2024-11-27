@@ -27,7 +27,6 @@ public class Bitacora {
         this.detalle = detalle;
     }
 
-
     public Bitacora(String ip, LocalDateTime fecha, Usuario usuario, String evento, String detalle) {
         this.ip = ip;
         this.fecha = fecha;
@@ -86,4 +85,7 @@ public class Bitacora {
     public void setDetalle(String detalle) {
         this.detalle = detalle;
     }
+
+
+
 }

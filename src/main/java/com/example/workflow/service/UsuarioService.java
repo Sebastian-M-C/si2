@@ -13,7 +13,7 @@ public interface UsuarioService extends UserDetailsService {
 
     Usuario save(Usuario usuario);
 
-    boolean existsByUsername(String usuario);
+//    boolean existsByUsername(String usuario);
 
     public Usuario guardar (UsuarioRegistroDto registroDto);
 
@@ -22,5 +22,7 @@ public interface UsuarioService extends UserDetailsService {
     public Usuario encontrarPorNombreUsuario(String nombreUsuario);
 
     public Long obtenerIdUsuarioPorNombre(String nombreUsuario);
+
+    public List<Usuario> obtenerTodosLosUsuarios();
 
 }

@@ -32,8 +32,6 @@ public class BitacoraServicio {
         bitacora.setDetalle(dispositivo);
         bitacora.setIp(ip);
         bitacora.setFecha(LocalDateTime.now());
-
-
         bitacoraRepositorio.save(bitacora);
     }
 

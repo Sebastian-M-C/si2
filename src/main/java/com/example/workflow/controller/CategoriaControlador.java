@@ -21,12 +21,8 @@ public class CategoriaControlador {
     @Autowired
     private UsuarioService usuarioService;
 
-
     @GetMapping
-    public String doc(HttpServletRequest request){
-        // Aquí debes devolver el nombre de la plantilla (sin la extensión .html)
-
-        //Regitrar en la bitacora que cliente visualizo la lista de categorias
+    public String doc(HttpServletRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String nombreUsuario = authentication.getName();
         Usuario usuario = usuarioService.encontrarPorNombreUsuario(nombreUsuario);
@@ -34,6 +30,6 @@ public class CategoriaControlador {
         String dispositivo = request.getHeader("User-Agent");
         bitacoraServicio.registrarAccion(usuario, "Visualizó la lista de categorias", dispositivo, ip);
 
-        return "tramites/index";  // Asegúrate de que este archivo esté en la carpeta correcta
+        return "tramites/index";
     }
 }

@@ -20,4 +20,9 @@ public class ClienteTramiteServiceImpl implements ClienteTramiteService {
         clienteTramite.setTramite(tramite);
         return clienteTramiteRepository.save(clienteTramite);
     }
+
+    @Override
+    public Object obtenerTodos() {
+        return null;
+    }
 }

@@ -15,35 +15,35 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Service
-public class JpaUserDetailsService implements UserDetailsService {
-
-    @Autowired
-    private UsuarioRepository  repository;
-
-    @Transactional(readOnly = true)
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        Optional<Usuario> userOptional = repository.findByUsername(username);
-
-        if (userOptional.isEmpty()) {
-            throw new UsernameNotFoundException(String.format("Username %s no existe en el sistema!", username));
-        }
-
-        Usuario user = userOptional.orElseThrow();
-
-        List<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .collect(Collectors.toList());
-
-        return new org.springframework.security.core.userdetails.User(
-                user.getUsername(),
-                user.getPassword(),
-                user.isEnabled(),
-                true,
-                true,
-                true,
-                authorities);
-    }
-}
+//@Service
+//public class JpaUserDetailsService implements UserDetailsService {
+//
+//    @Autowired
+//    private UsuarioRepository  repository;
+//
+//    @Transactional(readOnly = true)
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//
+//        Optional<Usuario> userOptional = repository.findByUsername(username);
+//
+//        if (userOptional.isEmpty()) {
+//            throw new UsernameNotFoundException(String.format("Username %s no existe en el sistema!", username));
+//        }
+//
+//        Usuario user = userOptional.orElseThrow();
+//
+//        List<GrantedAuthority> authorities = user.getRoles().stream()
+//                .map(role -> new SimpleGrantedAuthority(role.getName()))
+//                .collect(Collectors.toList());
+//
+//        return new org.springframework.security.core.userdetails.User(
+//                user.getUsername(),
+//                user.getPassword(),
+//                user.isEnabled(),
+//                true,
+//                true,
+//                true,
+//                authorities);
+//    }
+//}

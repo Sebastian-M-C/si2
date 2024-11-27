@@ -6,5 +6,7 @@ import com.example.workflow.entity.Tramite;
 
 public interface ClienteTramiteService {
     public ClienteTramite saveClienteTramite(Cliente cliente, Tramite tramite);
+
+    Object obtenerTodos();
 }
 
