@@ -1,30 +1,30 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>List Google Documents</title>
-</head>
-<body>
-<h1>Google Documents</h1>
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <title>List Google Documents</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Google Documents</h1>-->
 
-<!-- Mostrar mensajes de error -->
-<div th:if="${error}" style="color: red;">[[${error}]]</div>
+<!--&lt;!&ndash; Mostrar mensajes de error &ndash;&gt;-->
+<!--<div th:if="${error}" style="color: red;">[[${error}]]</div>-->
 
-<!-- Mostrar lista de documentos -->
-<table border="1">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Action</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="doc : ${documents}">
-    <td th:text="${doc.name}"></td>
-    <td>
-      <a th:href="@{/docs/edit(documentId=${doc.id})}">Edit</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
-</body>
-</html>
+<!--&lt;!&ndash; Mostrar lista de documentos &ndash;&gt;-->
+<!--<table border="1">-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th>Name</th>-->
+<!--    <th>Action</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr th:each="doc : ${documents}">-->
+<!--    <td th:text="${doc.name}"></td>-->
+<!--    <td>-->
+<!--      <a th:href="@{/docs/edit(documentId=${doc.id})}">Edit</a>-->
+<!--    </td>-->
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
+<!--</body>-->
+<!--</html>-->
